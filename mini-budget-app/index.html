@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini Budget</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" aria-label="Mini Budget App">
+    <header class="top">
+      <div>
+        <h1>Mini Budget</h1>
+        <p class="sub">Track income/expenses locally (saved in your browser).</p>
+      </div>
+      <div class="top-actions">
+        <button id="themeBtn" class="btn ghost" type="button" title="Toggle theme" aria-label="Toggle theme">🌓</button>
+      </div>
+    </header>
+
+    <section class="cards" aria-label="Summary">
+      <div class="card">
+        <div class="label">Income</div>
+        <div id="incomeTotal" class="value">$0.00</div>
+      </div>
+      <div class="card">
+        <div class="label">Expenses</div>
+        <div id="expenseTotal" class="value">$0.00</div>
+      </div>
+      <div class="card accent">
+        <div class="label">Balance</div>
+        <div id="balanceTotal" class="value">$0.00</div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Add transaction">
+      <form id="txForm" class="form">
+        <div class="row">
+          <label class="field">
+            <span>Description</span>
+            <input id="desc" type="text" placeholder="e.g., Paycheck, Groceries" maxlength="60" required />
+          </label>
+          <label class="field">
+            <span>Amount</span>
+            <input id="amount" type="text" inputmode="decimal" placeholder="e.g., 25.50" required />
+          </label>
+        </div>
+
+        <div class="row">
+          <label class="field">
+            <span>Type</span>
+            <select id="type" required>
+              <option value="expense" selected>Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Category</span>
+            <select id="category">
+              <option>General</option>
+              <option>Food</option>
+              <option>Transport</option>
+              <option>Rent</option>
+              <option>Utilities</option>
+              <option>Entertainment</option>
+              <option>Health</option>
+              <option>Shopping</option>
+              <option>Education</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Date</span>
+            <input id="date" type="date" required />
+          </label>
+        </div>
+
+        <div class="row end">
+          <button class="btn primary" type="submit">Add</button>
+          <button id="clearAllBtn" class="btn danger" type="button" title="Delete all data">Clear all</button>
+        </div>
+        <p id="formMsg" class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Transactions">
+      <div class="panel-head">
+        <div>
+          <h2>Transactions</h2>
+          <p class="sub small">Filter, search, export. Data stays on this device.</p>
+        </div>
+        <div class="panel-actions">
+          <input id="search" class="search" type="search" placeholder="Search…" aria-label="Search transactions" />
+          <select id="filterType" class="select" aria-label="Filter by type">
+            <option value="all" selected>All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expenses</option>
+          </select>
+          <button id="exportBtn" class="btn" type="button">Export CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="Transaction table" tabindex="0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th class="right">Amount</th>
+              <th class="right">Type</th>
+              <th class="right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="txBody"></tbody>
+        </table>
+      </div>
+
+      <div id="emptyState" class="empty">
+        No transactions yet. Add your first one above.
+      </div>
+    </section>
+
+    <footer class="foot">
+      Tip: Use negative values? Not needed — choose Expense/Income instead.
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
